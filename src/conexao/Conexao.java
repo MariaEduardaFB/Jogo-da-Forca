@@ -17,6 +17,7 @@ public class Conexao{
         if(conn == null){
             
                 conn = DriverManager.getConnection(url, user, password);
+                System.out.println("conexão estabelecida");
                 return conn;
             }else{
                 return conn;
