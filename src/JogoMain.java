@@ -1,13 +1,23 @@
+import java.util.Scanner;
+
 import DAO.JogadorDAO;
 import entity.Jogador;
 
 public class JogoMain {
     public static void main(String[] args) {
-        
-        Jogador j = new Jogador();
-        j.setNome("Duda");
+        Scanner scanner = new Scanner(System.in);
 
-        new JogadorDAO().cadastrarJogador(j);
+        System.out.println("Bem-vindo ao Jogo da Forca!");
+        System.out.print("Digite o seu nome: ");
+        String nomeJogador = scanner.nextLine();
 
+        Jogador jogador = new Jogador();
+        jogador.setNome(nomeJogador);
+
+        JogadorDAO jogadorDAO = new JogadorDAO();
+        jogadorDAO.cadastrarJogador(jogador);
+
+        System.out.println("Jogador cadastrado com sucesso!");
+        scanner.close();
     }
 }

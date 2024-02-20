@@ -9,7 +9,7 @@ import entity.Jogador;
 public class JogadorDAO {
     public void cadastrarJogador(Jogador jogador){
 
-        String sql = "INSERT INTO JOGADOR (NOME) VALUES(?)";
+        String sql = "INSERT INTO jogador (NOME) VALUES(?)";
         PreparedStatement ps = null;
 
         try {
