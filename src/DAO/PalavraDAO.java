@@ -54,4 +54,41 @@ public class PalavraDAO {
             }
         }
     }
+
+    public Palavra buscarPalavraAleatoriaPorNivel(int opcaoNivel) {
+        Connection connection = Conexao.getConexao();
+        String sql = "SELECT palavra, dica, fk_Nivel_id FROM palavra WHERE fk_Nivel_id = ? ORDER BY RAND() LIMIT 1";
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, opcaoNivel);
+            resultSet = preparedStatement.executeQuery();
+            if (!resultSet.next()) {
+                // Não há resultados, retornar null
+                return null;
+            }
+            Palavra palavra = new Palavra();
+            palavra.setPalavra(resultSet.getString("palavra"));
+            palavra.setDica(resultSet.getString("dica"));
+            // palavra.setId(resultSet.getInt("id")); // Removendo a obtenção do ID
+            palavra.setNivel(new Nivel(resultSet.getInt("fk_Nivel_id")));
+            return palavra;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            try {
+                if (resultSet != null) {
+                    resultSet.close();
+                }
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    
 }

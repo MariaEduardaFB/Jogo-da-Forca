@@ -24,4 +24,14 @@ public class JogadorDAO {
         }
 
     }
+
+    public void apagarJogadores() {
+        String sql = "DELETE FROM jogador";
+        try (PreparedStatement ps = Conexao.getConexao().prepareStatement(sql)) {
+            ps.executeUpdate();
+            System.out.println("Jogadores apagados com sucesso.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
