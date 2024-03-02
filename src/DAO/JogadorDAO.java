@@ -25,6 +25,22 @@ public class JogadorDAO {
 
     }
 
+    public void atualizarNomeJogador(int id, String novoNome) {
+        String sql = "UPDATE jogador SET NOME = ? WHERE ID = ?";
+        try (PreparedStatement ps = Conexao.getConexao().prepareStatement(sql)) {
+            ps.setString(1, novoNome);
+            ps.setInt(2, id);
+            int rowsAffected = ps.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Nome do jogador atualizado com sucesso.");
+            } else {
+                System.out.println("Falha ao atualizar o nome do jogador.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void apagarJogadores() {
         String sql = "DELETE FROM jogador";
         try (PreparedStatement ps = Conexao.getConexao().prepareStatement(sql)) {

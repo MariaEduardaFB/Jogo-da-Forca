@@ -18,7 +18,8 @@ public class Jogador {
         this.nome = nome;
     }
     public void ganharPonto() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'ganharPonto'");
+        pontos++;
     }
+    
+   
 }

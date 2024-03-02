@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import DAO.JogadorDAO;
@@ -9,6 +11,9 @@ public class JogoMain {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         JogadorDAO jogadorDAO = new JogadorDAO();
+        PalavraDAO palavraDAO = new PalavraDAO();
+
+        List<Palavra> palavrasUtilizadas = new ArrayList<>();
 
         System.out.println("Bem-vindo ao Jogo da Forca!");
 
@@ -39,9 +44,11 @@ public class JogoMain {
                 int placarRodadaJogador1 = 0;
                 int placarRodadaJogador2 = 0;
 
-                // Buscar palavra aleatória do nível escolhido
-                PalavraDAO palavraDAO = new PalavraDAO();
                 Palavra palavra = palavraDAO.buscarPalavraAleatoriaPorNivel(opcaoNivel);
+                palavrasUtilizadas.add(palavra);
+
+                // Buscar palavra aleatória do nível escolhido
+                
                 String palavraSecreta = palavra.getPalavra();
                 String dica = palavra.getDica();
 
@@ -84,6 +91,7 @@ public class JogoMain {
                             }
                             jogoEmAndamento = false;
                         }
+                        jogador.ganharPonto();
                     } else {
                         System.out.println("Letra incorreta!");
                         tentativas--;
@@ -97,7 +105,16 @@ public class JogoMain {
                 // Atualizar as pontuações dos jogadores após cada rodada
                 pontuacaoJogador1 += placarRodadaJogador1;
                 pontuacaoJogador2 += placarRodadaJogador2;
+
+                System.out.println("\nPalavras utilizadas nesta rodada:");
+                for (Palavra palavraUtilizada : palavrasUtilizadas) {
+                    System.out.println("- " + palavraUtilizada.getPalavra());
+                }
+                palavrasUtilizadas.clear(); 
+                
             }
+
+            
 
             // Verificar o vencedor
             String vencedor = (pontuacaoJogador1 > pontuacaoJogador2) ? jogador1.getNome() : (pontuacaoJogador1 < pontuacaoJogador2) ? jogador2.getNome() : "Empate";
@@ -120,8 +137,24 @@ public class JogoMain {
                 System.out.println("Dados dos jogadores apagados.");
                 continuarJogo = false;
             }
-        }
-    }
+
+            System.out.println("\nDeseja atualizar o nome de algum jogador?");
+            System.out.println("1 - Sim");
+            System.out.println("2 - Não");
+            System.out.print("Digite o número correspondente à opção desejada: ");
+            int opcaoAtualizarNome = scanner.nextInt();
+            if (opcaoAtualizarNome == 1) {
+                System.out.print("Digite o número do jogador que deseja atualizar o nome (1 para primeiro jogador, 2 para segundo jogador): ");
+                int numeroJogador = scanner.nextInt();
+                Jogador jogador = (numeroJogador == 1) ? jogador1 : jogador2;
+                System.out.print("Digite o novo nome para o jogador: ");
+                String novoNome = scanner.next();
+                jogador.setNome(novoNome);
+                System.out.println("Nome atualizado com sucesso.");
+}
+}
+
+}
 
     // Método para cadastrar um jogador
     private static Jogador cadastrarJogador(Scanner scanner, JogadorDAO jogadorDAO, String ordem) {
@@ -132,6 +165,8 @@ public class JogoMain {
         jogadorDAO.cadastrarJogador(jogador);
         return jogador;
     }
+
+    
 
     // Método para exibir a palavra com as letras corretas já adivinhadas
     private static String exibirPalavra(String palavra, StringBuilder letrasCorretas) {
@@ -156,4 +191,6 @@ public class JogoMain {
         }
         return true;
     }
+
+    
 }
