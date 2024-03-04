@@ -32,12 +32,8 @@ Este é um jogo simples da forca implementado em Java. Os jogadores tentam adivi
 
 ## 💻 Conceitos de Programação Orientada a Objetos (POO)
 - **Encapsulamento**: Presente nas classes `Jogador`, `Nivel`, `Palavra`, `JogadorDAO`, `NivelDAO` e `PalavraDAO`, onde os atributos são definidos como privados (`private`) e acessados por meio de métodos getters e setters.
-- **Herança**: Não está claramente evidenciado no código fornecido, mas poderia ser introduzido se houvesse uma hierarquia de classes relacionadas.
-- **Polimorfismo**: Não está claramente evidenciado no código fornecido, mas poderia ser introduzido ao criar métodos com o mesmo nome em diferentes classes ou ao usar interfaces.
-- **Abstração**: Presente nas classes `Jogador`, `Nivel` e `Palavra`, onde representam conceitos abstratos relevantes para o jogo.
-- **Associação**: Visto entre classes, como `JogoMain` e `JogadorDAO`, onde `JogoMain` utiliza os serviços de `JogadorDAO`.
-- **Composição**: Ocorre em `JogoMain`, onde instâncias de `Jogador` e `JogadorDAO` são criadas e utilizadas para operações de jogador durante o jogo.
-
+- **Construtores:** Presente na classe `Nível`, os construtores são usados para inicializar os objetos das classes com valores iniciais.
+- 
 <p align="center">
 🌻 Eduarda Batista 🌻
   <br>
