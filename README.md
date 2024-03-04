@@ -33,7 +33,7 @@ Este é um jogo simples da forca implementado em Java. Os jogadores tentam adivi
 ## 💻 Conceitos de Programação Orientada a Objetos (POO)
 - **Encapsulamento**: Presente nas classes `Jogador`, `Nivel`, `Palavra`, `JogadorDAO`, `NivelDAO` e `PalavraDAO`, onde os atributos são definidos como privados (`private`) e acessados por meio de métodos getters e setters.
 - **Construtores:** Presente na classe `Nível`, os construtores são usados para inicializar os objetos das classes com valores iniciais.
-- 
+
 <p align="center">
 🌻 Eduarda Batista 🌻
   <br>
